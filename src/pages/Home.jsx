@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router";
 
 export default function Home(){
 
@@ -20,12 +21,17 @@ export default function Home(){
             </article>
 
             <article className="reminder-btns-container">
-                <button className="btn">
-                    Add A Reminder
-                </button>
-                <button className="btn">
-                    See All Reminders
-                </button>
+                <Link to="add-reminder">
+                    <button className="btn">
+                        Add A Reminder
+                    </button>
+                </Link>
+                <Link to="view-all">
+                    <button className="btn">
+                        See All Reminders
+                    </button>
+                </Link>
+                
             </article>
         </section>
     </>

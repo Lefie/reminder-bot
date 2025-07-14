@@ -8,8 +8,7 @@
 #root{
   display: flex;
   flex-direction: column;
-  flex:1;
-  height: 100vh;
+  min-height: 100vh;
   font-family: "Italiana", serif;
   background-color:#F5F5F5;
   font-size: 62.5%;

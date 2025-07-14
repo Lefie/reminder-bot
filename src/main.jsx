@@ -2,6 +2,8 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route, } from 'react-router-dom'
 import Layout from './ui_components/Layout'
 import Home from './pages/Home'
+import ReminderForm from './pages/ReminderForm'
+import ViewAllReminders from './pages/ViewAllReminders'
 import './index.css'
 
 function App() {
@@ -11,7 +13,9 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout/>}>
         <Route index element={<Home />} />
-
+        <Route path="add-reminder" element={<ReminderForm form_mode={"adding"}  />}/>
+        <Route path="edit-reminder" element={<ReminderForm form_mode={"editing"}  />}/>
+        <Route path="view-all" element={<ViewAllReminders /> } />
       </Route>
     </Routes>
   </BrowserRouter>
