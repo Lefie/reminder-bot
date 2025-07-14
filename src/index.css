@@ -32,6 +32,9 @@
 .baselayout-section-container{
   min-height: 80vh;
   font-size:1rem;
+  /* border:10px solid pink; */
+  display: flex;
+  flex-direction: column;
 }
 
 .baselayout-footer {
@@ -110,4 +113,64 @@
   background-color: #F5F5F5;
 }
 
+/* reminder form */
+.form-element {
+  border:1px solid green;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: space-between;
+  min-width: 350px;
+  padding:0 1rem;
+  margin:0 auto;
+  margin-bottom: 1rem;
+  align-items: center;
+  height:3em;
+}
 
+.add-reminder-container {
+  /* border:1px solid rgb(155, 247, 134); */
+  display: flex;
+  flex-direction: column;
+  flex:1;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.add-reminder-container h1 {
+  font-size: 1.5rem;
+  margin:1rem 0;
+}
+
+.new-reminder-form {
+  color:#6E8E59;
+  border:1px solid #6E8E59;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  min-height: 25em;
+  width:25rem;
+  padding-top:2rem;
+  background-color: #CAE0BC;
+  margin-bottom: 1.5em;
+}
+
+input, select {
+  font-family: "Italiana", serif;
+  border:none;
+  border-radius: 0.4rem;
+  background-color: #EAFAEA;
+  width: 100px;
+  height: 2rem;
+  padding-left:0.4rem;
+}
+
+.form-element input:focus, select:focus {
+    outline:none;
+}
+
+.form-btn {
+  height:1.7em;
+  margin:0.5em 0em;
+  margin-bottom: 1em;
+  align-self: center;
+}
