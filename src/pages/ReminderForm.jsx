@@ -3,12 +3,36 @@ import { useState } from "react";
 
 export default function ReminderForm({form_mode}){
     const [mode, setMode] = useState(form_mode) //adding / editing
+    const [formValue, setFormValue] = useState({
+        "event-name":"",
+        "event-from":"",
+        "event-to":"",
+        "reminder_date":"",
+        "recurring_type":"",
+        "day_of_week":"",
+        "day_of_month":""
+    })
 
-    if (mode === "adding") {
+    // use a use - effect to check if form_mode is editing, then the formValue should be populated with data 
+
+    function handleValue(e) {
+        const target_ele = e.target
+        console.log(target_ele, target_ele.name, target_ele.type, target_ele.value)
+        setFormValue(prev => ({
+            ...prev,
+            [target_ele.name]: target_ele.value
+        }))
+    }
+
+    function submitFrom(formData){
+        // pass
+    }
+
+    
         return (<>
-            <section className="add-reminder-container">
-                <h1>Reminder Form</h1>
-                <form className="new-reminder-form">
+            <section className="reminder-container">
+                <h1>Reminder Form {mode === "editing" &&<span>(Editing)</span> }</h1>
+                <form className="reminder-form" action={submitFrom}>
                     <div className="form-element">
                         <label
                         htmlFor="event-name"
@@ -18,6 +42,8 @@ export default function ReminderForm({form_mode}){
                         type="text"
                         id="event-name"
                         name="event-name"
+                        value={formValue["event-name"]}
+                        onChange={handleValue}
                         ></input>
                     </div>
 
@@ -29,6 +55,8 @@ export default function ReminderForm({form_mode}){
                         type="time"
                         id="event-from"
                         name="event-from"
+                        value={formValue["event-from"]}
+                        onChange={handleValue}
                         ></input>
                     </div>
 
@@ -40,6 +68,8 @@ export default function ReminderForm({form_mode}){
                         type="time"
                         id="event-to"
                         name="event-to"
+                        value={formValue["event-to"]}
+                        onChange={handleValue}
                         ></input>
                     </div>
 
@@ -50,6 +80,8 @@ export default function ReminderForm({form_mode}){
                         type="date"
                         id="reminder_date"
                         name="reminder_date"
+                        value={formValue["reminder_date"]}
+                        onChange={handleValue}
                         />
                     </div>
 
@@ -59,6 +91,8 @@ export default function ReminderForm({form_mode}){
                         required
                         id="recurring_type" 
                         name="recurring_type"
+                        value={formValue["recurring_type"]}
+                        onChange={handleValue}
                         >
                             <option value="none" selected>none</option>
                             <option value="daily">daily</option>
@@ -74,31 +108,28 @@ export default function ReminderForm({form_mode}){
                         name="day_of_week"
                         type="number" 
                         min="1" 
-                        max="7"/>
+                        max="7"
+                        value={formValue["day_of_week"]}
+                        onChange={handleValue}
+                        />
                     </div>
 
                     <div className="form-element hidden" id="dom">
-                        <label for="day_of_month"> Day of Month </label>
+                        <label htmlFor="day_of_month"> Day of Month </label>
                         <input 
                         id="day_of_month"
                         name="day_of_month"
                         type="number" 
                         min="1" 
-                        max="31" />
+                        max="31"
+                        value={formValue["day_of_month"]}
+                        onChange={handleValue}
+                         />
                     </div>
 
-                    <button type="submit" className="btn form-btn">Add!</button>
+                    <button type="submit" className="btn form-btn"> {mode === "editing" ? <span>Update</span> : <span>Add</span> }</button>
                 </form>
             </section>
         </>)
-    }
-
-    if (mode === "editing") {
-        return (<>
-            <section className="add-reminder-container">
-            <p>Edit a reminder form</p>
-            </section>
-        </>)
-    }
     
 }
