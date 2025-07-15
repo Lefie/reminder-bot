@@ -14,7 +14,7 @@ function App() {
       <Route path="/" element={<Layout/>}>
         <Route index element={<Home />} />
         <Route path="add-reminder" element={<ReminderForm form_mode={"adding"}  />}/>
-        <Route path="edit-reminder" element={<ReminderForm form_mode={"editing"}  />}/>
+        <Route path="edit-reminder/:reminder_id" element={<ReminderForm form_mode={"editing"}  />}/>
         <Route path="view-all" element={<ViewAllReminders /> } />
       </Route>
     </Routes>
