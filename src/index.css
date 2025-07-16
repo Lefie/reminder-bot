@@ -182,7 +182,7 @@ input, select {
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  overflow-x: hidden;
 }
 
 .view-reminders-details-container {
@@ -190,7 +190,7 @@ input, select {
   flex-direction: column;
   border:2.3px solid #6E8E59;
   border-radius: 0.2rem;
-  width:40rem;
+  width: 35rem;
   margin-top:3.5rem;
   justify-content: center;
 }
@@ -299,3 +299,7 @@ input, select {
 }
 
 
+/* util */
+.hidden {
+  display: none;
+}

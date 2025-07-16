@@ -14,14 +14,25 @@ export default function ViewAllReminders(){
         "day_of_week": "",
         "day_of_month": ""
     }])
+    const [searchContent, setSearchContent] = useState("")
     const [reminderDateActive, setRDActive] = useState("")
     const [topReminderActive, setTopReminderActive] = useState("")
     const [monthReminderActive, setMonthReminderActive] = useState("")
 
     function search(){
-        console.log("search ")
+        console.log("search ", searchContent,"jkn")
+        if (reminderDateActive) {
+            console.log("reminder date")
+        }
+
+
     }
-    
+
+    function handleDelete(reminder_id) {
+        console.log("delete", reminder_id)
+    }
+
+ 
     function handleActiveClass(e){
         const target = e.target
         console.log( "id",target.id)
@@ -67,6 +78,8 @@ export default function ViewAllReminders(){
                 id="search-bar"
                 placeholder="search something"
                 aria-label="search"
+                value={searchContent}
+                onChange={(e)=>setSearchContent(e.target.value)}
                 />
                 <button className="btn small-btn">Search</button>
             </form>
@@ -88,7 +101,7 @@ export default function ViewAllReminders(){
                     <p>{reminder.reminder_date.slice(0,10)}</p>
                     <article className="reminder-modifiers">
                         <Link to={`../edit-reminder/${reminder.reminder_id}`}><button className="btn reminder-edit-btn">E</button></Link>
-                        <button className="btn reminder-delete-btn">X</button>
+                        <button onClick={()=> handleDelete(reminder.reminder_id)} className="btn reminder-delete-btn">X</button>
                     </article>
                 </article>
             </>))}

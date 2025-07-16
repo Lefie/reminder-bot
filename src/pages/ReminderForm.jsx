@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function ReminderForm({form_mode}){
     const [mode, setMode] = useState(form_mode) //adding / editing
@@ -23,6 +23,27 @@ export default function ReminderForm({form_mode}){
             [target_ele.name]: target_ele.value
         }))
     }
+
+    function handleHiddenClassForWeekly() {
+        console.log("reccuring type:", formValue["recurring_type"])
+       
+        if (formValue["recurring_type"] === "weekly"){
+            return ""
+        }else {
+            return "hidden"
+        }
+    }
+
+    function handleHiddenClassForMonthly() {
+        console.log("reccuring type:", formValue["recurring_type"])
+       
+        if (formValue["recurring_type"] === "monthly"){
+            return ""
+        }else {
+            return "hidden"
+        }
+    }
+    
 
     function submitFrom(formData){
         // pass
@@ -101,7 +122,7 @@ export default function ReminderForm({form_mode}){
                         </select>
                     </div>
 
-                    <div className="form-element hidden" id="dow">
+                    <div className={`form-element ${handleHiddenClassForWeekly()}`} id="dow">
                         <label htmlFor="day_of_week"> Day of Week </label>
                         <input  
                         id="day_of_week"
@@ -114,7 +135,7 @@ export default function ReminderForm({form_mode}){
                         />
                     </div>
 
-                    <div className="form-element hidden" id="dom">
+                    <div className={`form-element ${handleHiddenClassForMonthly()}`} id="dom">
                         <label htmlFor="day_of_month"> Day of Month </label>
                         <input 
                         id="day_of_month"
