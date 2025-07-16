@@ -46,6 +46,7 @@
   justify-content: center;
   align-items: center;
   font-size:1rem;
+  min-height: 10vh;
 }
 
 .link-to-home{
@@ -56,25 +57,27 @@
 /* home.jsx */
 .home-page {
   height:100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .home-page h2 {
   color:#6E8E59;
   margin-top:6rem;
-  margin-left:3.5rem;
   margin-bottom:2.5rem;
+
 }
 
 .reminders-section {
-  border:1px solid #6E8E59;
-  margin-left:7rem;
-  margin-right:7rem;
+  border:2px solid #6E8E59;
   min-height:5em;
+  max-height: 15em;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  max-width: 750px;
-  margin:0 auto;
+  min-width: 40rem;
 }
 
 .no-reminders-msg {
@@ -84,9 +87,11 @@
 .reminder-btns-container {
   display: flex;
   justify-content: space-between;
-  max-width: 300px;
+  max-width: 500px;
+  width:20rem;
   margin:0 auto;
-  margin-top:10rem;
+  margin-top:5rem;
+  margin-bottom: 5rem;
 }
 
 .btn{
@@ -190,10 +195,12 @@ input, select {
   flex-direction: column;
   border:2.3px solid #6E8E59;
   border-radius: 0.2rem;
-  width: 35rem;
   margin-top:3.5rem;
   justify-content: center;
+  min-width: 40em;
+  padding:0.5rem;
 }
+
 
 .search-bar-container {
   /* border:1px solid red; */
@@ -232,7 +239,6 @@ input, select {
 .view-reminders-container h1 {
   /* border:1px solid red; */
   text-align: center;
-  color:#6E8E59;
   font-size:1.6rem;
   margin: 0.4em 0;
 }
@@ -269,6 +275,10 @@ input, select {
 
 .reminders-container {
   border-radius: 0.2rem;
+  padding:1rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
 }
 
 .active {
@@ -279,8 +289,15 @@ input, select {
 
 .reminder-details {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   padding:0.2em;
+  /* border:1px solid red; */
+}
+
+.reminder-details p {
+  /* border:1px solid salmon; */
+  width: 10em;
+  overflow-x: scroll;
 }
 
 .reminder-modifiers {
@@ -296,6 +313,10 @@ input, select {
   width:1.5em;
   background-color: #CAE0BC;
   border:1px solid #6E8E59;
+}
+
+.reminders-msg {
+  text-align: center;
 }
 
 

@@ -1,19 +1,19 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router";
+import { getRemindersArray } from "../../apis";
 
 export default function ViewAllReminders(){
-    const [allReminders, setAllReminders] = useState([{
-        "reminder_id": 39,
-        "event_name": "parish dinner",
-        "event_from": "19:00:00",
-        "event_to": "21:00:00",
-        "reminder_date": "2025-03-15T04:00:00.000Z",
-        "isrecurring": false,
-        "recurringtype": "none",
-        "day_of_week": "",
-        "day_of_month": ""
-    }])
+    const [allReminders, setAllReminders] = useState()
+
+    useEffect(()=>{
+            async function populateReminders(){
+                const reminders_arr = await getRemindersArray()
+                setAllReminders(reminders_arr)
+            }
+            populateReminders()
+    },[])
+    
     const [searchContent, setSearchContent] = useState("")
     const [reminderDateActive, setRDActive] = useState("")
     const [topReminderActive, setTopReminderActive] = useState("")

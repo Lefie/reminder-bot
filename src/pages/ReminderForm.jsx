@@ -1,12 +1,18 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router";
+import { getReminderItemById } from "../../apis";
 
 export default function ReminderForm({form_mode}){
+    const {reminder_id} = useParams()
+    console.log(reminder_id)
+   
+    
     const [mode, setMode] = useState(form_mode) //adding / editing
     const [formValue, setFormValue] = useState({
-        "event-name":"",
-        "event-from":"",
-        "event-to":"",
+        "event_name":"",
+        "event_from":"",
+        "event_to":"",
         "reminder_date":"",
         "recurring_type":"",
         "day_of_week":"",
@@ -14,6 +20,26 @@ export default function ReminderForm({form_mode}){
     })
 
     // use a use - effect to check if form_mode is editing, then the formValue should be populated with data 
+    if (form_mode === "editing"){
+        useEffect(()=>{
+            async function populateReminder(reminder_id){
+                const reminder_data = await getReminderItemById(reminder_id)
+                console.log(reminder_data)
+                console.log(reminder_data["reminder_date"].slice(0,10))
+                setFormValue(prev =>({
+                    ...prev,
+                    "event_name":reminder_data["event_name"],
+                    "event_from":reminder_data["event_from"],
+                    "event_to":reminder_data["event_to"],
+                    "reminder_date":reminder_data["reminder_date"].slice(0,10),
+                    "recurring_type":reminder_data["recurringtype"],
+                    "day_of_week":reminder_data["day_of_week"],
+                    "day_of_month":reminder_data["day_of_month"]
+                }))
+            }
+            populateReminder(reminder_id)
+        },[reminder_id])
+    }
 
     function handleValue(e) {
         const target_ele = e.target
@@ -47,6 +73,7 @@ export default function ReminderForm({form_mode}){
 
     function submitFrom(formData){
         // pass
+        console.log("submit")
     }
 
     
@@ -56,40 +83,40 @@ export default function ReminderForm({form_mode}){
                 <form className="reminder-form" action={submitFrom}>
                     <div className="form-element">
                         <label
-                        htmlFor="event-name"
+                        htmlFor="event_name"
                         >Name</label>
                         <input 
                         required
                         type="text"
-                        id="event-name"
-                        name="event-name"
-                        value={formValue["event-name"]}
+                        id="event_name"
+                        name="event_name"
+                        value={formValue["event_name"]}
                         onChange={handleValue}
                         ></input>
                     </div>
 
                     <div className="form-element">
                         <label
-                        htmlFor="event-from"
+                        htmlFor="event_from"
                         >Event From</label>
                         <input 
                         type="time"
-                        id="event-from"
-                        name="event-from"
-                        value={formValue["event-from"]}
+                        id="event_from"
+                        name="event_from"
+                        value={formValue["event_from"]}
                         onChange={handleValue}
                         ></input>
                     </div>
 
                     <div className="form-element">
                         <label
-                        htmlFor="event-to"
+                        htmlFor="event_to"
                         >Event to</label>
                         <input 
                         type="time"
-                        id="event-to"
-                        name="event-to"
-                        value={formValue["event-to"]}
+                        id="event_to"
+                        name="event_to"
+                        value={formValue["event_to"]}
                         onChange={handleValue}
                         ></input>
                     </div>
@@ -115,7 +142,7 @@ export default function ReminderForm({form_mode}){
                         value={formValue["recurring_type"]}
                         onChange={handleValue}
                         >
-                            <option value="none" selected>none</option>
+                            <option value="none" defaultValue={"none"}>none</option>
                             <option value="daily">daily</option>
                             <option value="weekly">weekly</option>
                             <option value="monthly">monthly</option>
