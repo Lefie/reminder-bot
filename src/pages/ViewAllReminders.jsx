@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router";
-import { getRemindersArray } from "../../apis";
+import { getRemindersArray, deleteReminderById } from "../../apis";
 
 export default function ViewAllReminders(){
     const [allReminders, setAllReminders] = useState()
@@ -58,13 +58,17 @@ export default function ViewAllReminders(){
         else {
             setViewReminders(allReminders)
         }
- 
- 
-
     }
 
-    function handleDelete(reminder_id) {
+    async function handleDelete(reminder_id) {
         console.log("delete", reminder_id)
+        const data = await deleteReminderById(reminder_id)
+        if(data === "deleted") {
+            console.log("delete successful")
+            const reminders_arr = await getRemindersArray()
+            setAllReminders(reminders_arr)
+            setViewReminders(reminders_arr)
+        }
     }
 
  

@@ -41,8 +41,6 @@ export default function ReminderForm({form_mode}){
             }
             populateReminder(reminder_id)
         },[reminder_id])
-
-
     }
 
     function handleValue(e) {
