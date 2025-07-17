@@ -157,6 +157,7 @@
   padding-top:2rem;
   background-color: #CAE0BC;
   margin-bottom: 1.5em;
+  align-items: center;
 }
 
 input, select {
@@ -224,6 +225,7 @@ input, select {
   width:10rem;
   border:1.3px solid #6E8E59;
   border-radius: 1rem;
+  background-color: #F5F5F5;
 }
 
 .search-bar-container input#search-bar:focus {
@@ -319,6 +321,29 @@ input, select {
   text-align: center;
 }
 
+.feedback{
+  padding:0.2rem;
+  width: 5rem;
+  text-align: center;
+  border-radius: 0.1rem;
+  margin-bottom: 1em;
+}
+
+.success {
+  border:1px solid #6E8E59;
+  background-color: #EAFAEA;
+}
+
+.failed {
+  border:1px solid #f66161;
+  color:red;
+  background-color: #faeaea;
+}
+
+.feedback p {
+  margin:0;
+  padding: 0;
+}
 
 /* util */
 .hidden {

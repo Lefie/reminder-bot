@@ -5,11 +5,13 @@ import { getRemindersArray } from "../../apis";
 
 export default function ViewAllReminders(){
     const [allReminders, setAllReminders] = useState()
+    const [viewReminders, setViewReminders] = useState()
 
     useEffect(()=>{
             async function populateReminders(){
                 const reminders_arr = await getRemindersArray()
                 setAllReminders(reminders_arr)
+                setViewReminders(reminders_arr)
             }
             populateReminders()
     },[])
@@ -20,11 +22,44 @@ export default function ViewAllReminders(){
     const [monthReminderActive, setMonthReminderActive] = useState("")
 
     function search(){
+        
         console.log("search ", searchContent,"jkn")
         if (reminderDateActive) {
             console.log("reminder date")
+            const a = /^\d{4}-\d{2}-\d{2}$/
+            const res = searchContent.match(a)
+            if (res) {
+                setViewReminders(allReminders.filter((reminder) => reminder.reminder_date.slice(0,10) === searchContent))
+            }
         }
-
+        else if (topReminderActive) {
+            if ( !isNaN(searchContent) ) {
+                const num = parseInt(searchContent)
+                if (num >= allReminders.length) {
+                    console.log("show all")
+                    setViewReminders(allReminders)
+                }else{
+                    setViewReminders(allReminders.slice(0,searchContent))
+                }
+            }
+        }
+        else if (monthReminderActive) {
+            console.log("month reminder reminder")
+            if ( !isNaN(searchContent) ) { 
+                const num = parseInt(searchContent)
+                if (num <= 0 || num >= 13) {
+                    console.log("month is not valid")
+                }else{
+                    console.log(allReminders[0].reminder_date)
+                    setViewReminders(allReminders.filter((reminder)=> num === new Date(reminder.reminder_date).getMonth() + 1 ))
+                }
+            }
+        }
+        else {
+            setViewReminders(allReminders)
+        }
+ 
+ 
 
     }
 
@@ -91,7 +126,7 @@ export default function ViewAllReminders(){
         </div>
 
         <div className="view-reminders-details-container">
-            {allReminders && allReminders.length > 0 && allReminders.map((reminder)=>(
+            {viewReminders && viewReminders.length > 0 && viewReminders.map((reminder)=>(
             <>
                 <article className="reminder-details">
                     <p>{reminder.event_name}</p>
@@ -107,7 +142,7 @@ export default function ViewAllReminders(){
             </>))}
            
 
-            {allReminders && allReminders.length == 0 && 
+            {viewReminders && viewReminders.length == 0 && 
             (<>
                 <p className="no-reminders-msg">No reminders. You are all up to date</p>
             </>)}

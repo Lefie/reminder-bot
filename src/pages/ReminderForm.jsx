@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { getReminderItemById } from "../../apis";
+import { updateReminderItemById,getReminderItemById, addReminder } from "../../apis";
 
 export default function ReminderForm({form_mode}){
     const {reminder_id} = useParams()
@@ -18,6 +18,8 @@ export default function ReminderForm({form_mode}){
         "day_of_week":"",
         "day_of_month":""
     })
+    const [success, setSuccess] = useState(false)
+    const [fail, setFail] = useState(false)
 
     // use a use - effect to check if form_mode is editing, then the formValue should be populated with data 
     if (form_mode === "editing"){
@@ -39,6 +41,8 @@ export default function ReminderForm({form_mode}){
             }
             populateReminder(reminder_id)
         },[reminder_id])
+
+
     }
 
     function handleValue(e) {
@@ -71,9 +75,64 @@ export default function ReminderForm({form_mode}){
     }
     
 
-    function submitFrom(formData){
-        // pass
+    async function submitFrom(formData){
+
         console.log("submit")
+        console.log(formData.get("recurring_type"))
+        const data_obj = {
+            "event_name":formData.get("event_name"),
+            "event_from":formData.get("event_from"),
+            "event_to":formData.get("event_to"),
+            "reminder_date":formData.get("reminder_date"),
+            "recurring_type":formData.get("recurring_type"),
+            "day_of_week":formData.get("day_of_week"),
+            "day_of_month":formData.get("day_of_month")
+        }
+
+        if (mode === "adding") {
+            console.log("adding a new reminder")
+            console.log(data_obj)
+            const create_reminder = await addReminder(data_obj)
+            if (create_reminder["msg"] === "insertion success") {
+                console.log("adding success, redirecting ...")
+                setSuccess(true)
+                setTimeout(()=>{
+                    setSuccess(false)
+                    setFormValue({
+                        "event_name":"",
+                        "event_from":"",
+                        "event_to":"",
+                        "reminder_date":"",
+                        "recurring_type":"",
+                        "day_of_week":"",
+                        "day_of_month":""})
+                },2000)
+            }else {
+                console.log("adding failed. something went wrong")
+                setFail(true)
+                setTimeout(()=>{setFail(false)},2000)
+            }
+        }
+
+        if (mode === "editing") {
+            const res =  await updateReminderItemById(reminder_id, data_obj)
+            console.log(res)
+            if (res === "values updated"){
+                console.log("success")
+                setSuccess(true)
+                setTimeout(()=>{
+                    setSuccess(false)
+                },2000)
+            }else{
+                console.log("adding failed. something went wrong")
+                setFail(true)
+                setTimeout(()=>{setFail(false)},2000)
+            }
+
+        }
+
+
+        
     }
 
     
@@ -99,7 +158,8 @@ export default function ReminderForm({form_mode}){
                         <label
                         htmlFor="event_from"
                         >Event From</label>
-                        <input 
+                        <input
+                        required 
                         type="time"
                         id="event_from"
                         name="event_from"
@@ -113,6 +173,7 @@ export default function ReminderForm({form_mode}){
                         htmlFor="event_to"
                         >Event to</label>
                         <input 
+                        required
                         type="time"
                         id="event_to"
                         name="event_to"
@@ -142,7 +203,7 @@ export default function ReminderForm({form_mode}){
                         value={formValue["recurring_type"]}
                         onChange={handleValue}
                         >
-                            <option value="none" defaultValue={"none"}>none</option>
+                            <option value="none">none</option>
                             <option value="daily">daily</option>
                             <option value="weekly">weekly</option>
                             <option value="monthly">monthly</option>
@@ -176,6 +237,8 @@ export default function ReminderForm({form_mode}){
                     </div>
 
                     <button type="submit" className="btn form-btn"> {mode === "editing" ? <span>Update</span> : <span>Add</span> }</button>
+                    <div className={`feedback ${success ?"success":"hidden"}`}><p>success</p></div>
+                    <div className={`feedback ${fail ?"failed":"hidden"}`}><p>failed</p></div>
                 </form>
             </section>
         </>)
