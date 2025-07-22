@@ -1,12 +1,21 @@
-# React + Vite
+# ⏰ Reminder App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Reminder App** is a full‑stack reminder management application where users can create, view, update, and delete reminders through a clean, responsive interface.
 
-Currently, two official plugins are available:
+This project originally started as a backend‑only application, using a scheduler to send daily reminders through a Discord bot and weekly notifications via email. Over time, I decided to make it a full‑stack project by adding a **frontend interface built with React** to easily manage reminders.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Built with **React**, **Node.js**, **Express.js**, and **PostgreSQL**, deployed with **Vercel** (frontend) and **Railway** (backend & database).
 
-## Expanding the ESLint configuration
+You can add some reminders here: [Reminder App](https://reminder-bot-sigma.vercel.app)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Selected Screens 
+* Home page /
+[Reminder App homepage](./src/assets/screenshot1.png)
+On the home page, it shows the upcoming 3 reminders. To see the full list of reminders, I can click on the "See All Reminders" button. If I need to add a reminder, I'd click on the "Add A Reminder" button.
+
+* Add a reminder /add-reminder
+![Add reminder1](./src/assets/screenshot2.png) ![Add reminder2](./src/assets/screenshot3.png)
+When creating details for the reminder, you can also set the frequency - is it a one-time reminder? Is it recurring?
+If it is recurring, how often is it? weekly? monthly?
+
+
