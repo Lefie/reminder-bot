@@ -10,12 +10,17 @@ You can add some reminders here: [Reminder App](https://reminder-bot-sigma.verce
 
 ### Selected Screens 
 * Home page /
-[Reminder App homepage](./src/assets/screenshot1.png)
+![Reminder App homepage](./src/assets/screenshot1.png)
 On the home page, it shows the upcoming 3 reminders. To see the full list of reminders, I can click on the "See All Reminders" button. If I need to add a reminder, I'd click on the "Add A Reminder" button.
 
 * Add a reminder /add-reminder
 ![Add reminder1](./src/assets/screenshot2.png) ![Add reminder2](./src/assets/screenshot3.png)
 When creating details for the reminder, you can also set the frequency - is it a one-time reminder? Is it recurring?
 If it is recurring, how often is it? weekly? monthly?
+
+* View all reminders /view-all
+![View all reminders](./src/assets/screenshot4.png) ![filter reminders by month](./src/assets/screenshot5.png)
+While you can view all the upcoming reminders at once, you can also search by filter to see certain reminders -- by reminder date(2025-07-25), by top # of reminders(for instance, top 3 reminders), by month(i.e, 8)
+
 
 
