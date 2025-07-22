@@ -20,7 +20,7 @@ If it is recurring, how often is it? weekly? monthly?
 
 * View all reminders /view-all
 ![View all reminders](./src/assets/screenshot4.png) ![filter reminders by month](./src/assets/screenshot5.png)
-While you can view all the upcoming reminders at once, you can also search by filter to see certain reminders -- by reminder date(2025-07-25), by top # of reminders(for instance, top 3 reminders), by month(i.e, 8)
+While you can view all the upcoming reminders at once, you can also search by filter to see certain reminders -- by reminder date(2025-07-25), by top # of reminders(for instance, top 3 reminders), by month(i.e, 8). You can also use the buttons to the right side to either edit or delete the reminders.
 
 
 
